@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ae97b9dc419349f19a8d090bc3bc89e2" Name="Diagram1">
+        <EntityTypeShape EntityType="EGESupportModel.areas" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EGESupportModel.au_roles" Width="1.5" PointX="5.125" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EGESupportModel.au_users" Width="1.5" PointX="5.125" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EGESupportModel.blank_types" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EGESupportModel.exam_dates" Width="1.5" PointX="0.875" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EGESupportModel.ppe" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EGESupportModel.subject_blanks" Width="1.5" PointX="5.125" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EGESupportModel.subjects" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <AssociationConnector Association="EGESupportModel.FK_au_users_areas" ManuallyRouted="false" />
+        <AssociationConnector Association="EGESupportModel.FK_ppe_areas" ManuallyRouted="false" />
+        <AssociationConnector Association="EGESupportModel.FK_au_users_au_roles" ManuallyRouted="false" />
+        <AssociationConnector Association="EGESupportModel.FK_au_users_ppe" ManuallyRouted="false" />
+        <AssociationConnector Association="EGESupportModel.FK_subject_blanks_blank_types" ManuallyRouted="false" />
+        <AssociationConnector Association="EGESupportModel.FK_exam_dates_subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="EGESupportModel.FK_subject_blanks_subjects" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EGESupportModel.ppe_exam_statuses" Width="1.5" PointX="0.875" PointY="17.875" />
+        <EntityTypeShape EntityType="EGESupportModel.ppe_exams" Width="1.5" PointX="0.875" PointY="12" />
+        <AssociationConnector Association="EGESupportModel.FK_ppe_exams_exam_dates" />
+        <AssociationConnector Association="EGESupportModel.FK_ppe_exams_ppe" />
+        <AssociationConnector Association="EGESupportModel.FK_ppe_exams_ppe_exam_statuses" />
+        <EntityTypeShape EntityType="EGESupportModel.journals" Width="1.5" PointX="0.875" PointY="15" />
+        <AssociationConnector Association="EGESupportModel.FK_journals_blank_types" />
+        <AssociationConnector Association="EGESupportModel.FK_journals_ppe_exams" />
+        <EntityTypeShape EntityType="EGESupportModel.ppe_messages" Width="1.5" PointX="7.625" PointY="12.25" />
+        <AssociationConnector Association="EGESupportModel.FK_ppe_messages_au_users" />
+        <AssociationConnector Association="EGESupportModel.FK_ppe_messages_ppe_exams" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

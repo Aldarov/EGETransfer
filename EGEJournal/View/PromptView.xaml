@@ -1,0 +1,25 @@
+﻿<telerik:RadWindow x:Class="EGEJournal.View.PromptView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        DataContext="{Binding PromptVM, Source={StaticResource Locator}}"
+        HideMaximizeButton="True" HideMinimizeButton="True" Name="PromptWindow"
+        Header="Отправить сообщение" SizeToContent="True" Width="300" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Введите описание ошибки:" Margin="10,10,10,0" FontWeight="Bold" TextWrapping="Wrap"/>
+        <TextBox Grid.Row="1" Margin="10" MinHeight="100" Text="{Binding PPEMessage.message, Mode=TwoWay}" TextWrapping="Wrap"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button Content="Отправить" Margin="10,5" Padding="10,3" Width="80" 
+                    Command="{Binding SendMessageCommand}" CommandParameter="{Binding ElementName=PromptWindow}"/>
+            <Button Content="Отменить" Margin="10,5" Padding="10,3" Width="80" 
+                    Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=PromptWindow}"/>
+        </StackPanel>
+        <ItemsControl Grid.Row="3" Style="{StaticResource ListViewValidation}" />
+    </Grid>
+</telerik:RadWindow>

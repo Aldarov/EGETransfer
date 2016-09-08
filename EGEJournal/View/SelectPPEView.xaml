@@ -1,0 +1,28 @@
+﻿<telerik:RadWindow x:Class="EGEJournal.View.SelectPPEView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        DataContext="{Binding SelectPPEVM, Source={StaticResource Locator}}"
+        Header="Добавление ППЭ" SizeToContent="True" WindowStartupLocation="CenterOwner" HideMaximizeButton="True" HideMinimizeButton="True">
+    <Grid Width="300">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Margin="10,5,10,5" HorizontalAlignment="Left" Text="Выберите ППЭ:"/>
+        <telerik:RadComboBox Grid.Row="1" Margin="10,0" ItemsSource="{Binding ListPPEExam}" 
+                             SelectedValuePath="id" DisplayMemberPath="ppe_full_name" 
+                             SelectedValue="{Binding SelectedValue, Mode=TwoWay, ValidatesOnDataErrors=True}"
+                             Name="cmbPPE" />
+        <ItemsControl Grid.Row="2" Style="{StaticResource ListViewValidation}" />
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
+            <Button Margin="10,15,20,10" Padding="10,3" Width="80" Content="Добавить" 
+                    Command="{Binding AddPPECommand}"
+                    CommandParameter="{Binding ElementName=cmbPPE, Path=SelectedItem}"/>
+            <Button Margin="20,15,10,10" Padding="10,3" Width="80" Content="Отмена" IsCancel="True"/>
+        </StackPanel>
+        <telerik:RadBusyIndicator Grid.RowSpan="4" BusyContent="Пожалуйста подождите..." IsBusy="{Binding IsBusy}"/>
+    </Grid>
+</telerik:RadWindow>

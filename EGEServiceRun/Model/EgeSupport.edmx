@@ -1,0 +1,1022 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище EGESupportModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="areas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="folder_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="au_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="au_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fio" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="ppe_id" Type="int" />
+          <Property Name="area_id" Type="int" />
+          <Property Name="disable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="blank_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="blank_kind_id" Type="int" Nullable="false" />
+          <Property Name="short_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="folder_name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="exam_dates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subject_id" Type="int" Nullable="false" />
+          <Property Name="exam_date" Type="datetime" Nullable="false" />
+          <Property Name="wave_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="256" />
+          <Property Name="class" Type="int" Nullable="false" />
+          <Property Name="is_actual" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="journals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ppe_exam_id" Type="int" Nullable="false" />
+          <Property Name="blank_type_id" Type="int" Nullable="false" />
+          <Property Name="auditorium" Type="int" Nullable="false" />
+          <Property Name="count_blanks" Type="int" Nullable="false" />
+          <Property Name="count_add_blanks" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ppe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="area_id" Type="int" Nullable="false" />
+          <Property Name="is_tom" Type="bit" Nullable="false" />
+          <Property Name="ppe_code" Type="int" Nullable="false" />
+          <Property Name="class" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ppe_exam_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ppe_exams">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="exam_date_id" Type="int" Nullable="false" />
+          <Property Name="ppe_id" Type="int" Nullable="false" />
+          <Property Name="files_path" Type="varchar" MaxLength="512" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="is_upload_data" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ppe_messages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ppe_exam_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="message" Type="varchar(max)" Nullable="false" />
+          <Property Name="mes_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subject_blanks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subject_id" Type="int" Nullable="false" />
+          <Property Name="blank_type_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subjects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="test_type_code" Type="int" Nullable="false" />
+          <Property Name="folder_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_au_users_areas">
+          <End Role="areas" Type="Self.areas" Multiplicity="0..1" />
+          <End Role="au_users" Type="Self.au_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="areas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="au_users">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_au_users_au_roles">
+          <End Role="au_roles" Type="Self.au_roles" Multiplicity="1" />
+          <End Role="au_users" Type="Self.au_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="au_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="au_users">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_au_users_ppe">
+          <End Role="ppe" Type="Self.ppe" Multiplicity="0..1" />
+          <End Role="au_users" Type="Self.au_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="au_users">
+              <PropertyRef Name="ppe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_exam_dates_subjects">
+          <End Role="subjects" Type="Self.subjects" Multiplicity="1" />
+          <End Role="exam_dates" Type="Self.exam_dates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="exam_dates">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_journals_blank_types">
+          <End Role="blank_types" Type="Self.blank_types" Multiplicity="1" />
+          <End Role="journals" Type="Self.journals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blank_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="journals">
+              <PropertyRef Name="blank_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_journals_ppe_exams">
+          <End Role="ppe_exams" Type="Self.ppe_exams" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="journals" Type="Self.journals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe_exams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="journals">
+              <PropertyRef Name="ppe_exam_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_areas">
+          <End Role="areas" Type="Self.areas" Multiplicity="1" />
+          <End Role="ppe" Type="Self.ppe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="areas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_exams_exam_dates">
+          <End Role="exam_dates" Type="Self.exam_dates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ppe_exams" Type="Self.ppe_exams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="exam_dates">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_exams">
+              <PropertyRef Name="exam_date_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_exams_ppe">
+          <End Role="ppe" Type="Self.ppe" Multiplicity="1" />
+          <End Role="ppe_exams" Type="Self.ppe_exams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_exams">
+              <PropertyRef Name="ppe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_exams_ppe_exam_statuses">
+          <End Role="ppe_exam_statuses" Type="Self.ppe_exam_statuses" Multiplicity="0..1" />
+          <End Role="ppe_exams" Type="Self.ppe_exams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe_exam_statuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_exams">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_messages_au_users">
+          <End Role="au_users" Type="Self.au_users" Multiplicity="1" />
+          <End Role="ppe_messages" Type="Self.ppe_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="au_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_messages">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_messages_ppe_exams">
+          <End Role="ppe_exams" Type="Self.ppe_exams" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ppe_messages" Type="Self.ppe_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe_exams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_messages">
+              <PropertyRef Name="ppe_exam_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_subject_blanks_blank_types">
+          <End Role="blank_types" Type="Self.blank_types" Multiplicity="1" />
+          <End Role="subject_blanks" Type="Self.subject_blanks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blank_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject_blanks">
+              <PropertyRef Name="blank_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_subject_blanks_subjects">
+          <End Role="subjects" Type="Self.subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subject_blanks" Type="Self.subject_blanks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject_blanks">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="get_journal_content" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" Nullable="false" />
+                <Property Name="exam_date_id" Type="int" Nullable="false" />
+                <Property Name="area_id" Type="int" Nullable="false" />
+                <Property Name="ppe_id" Type="int" Nullable="false" />
+                <Property Name="aud" Type="int" Nullable="false" />
+                <Property Name="count_blanks" Type="int" Nullable="false" />
+                <Property Name="blank_type_id" Type="int" Nullable="false" />
+                <Property Name="count_add_blanks" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="get_list_journals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="subject_id" Type="int" Nullable="false" />
+                <Property Name="subject_name" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="exam_date_id" Type="int" Nullable="false" />
+                <Property Name="exam_date" Type="datetime" Nullable="false" />
+                <Property Name="description" Type="varchar" MaxLength="256" />
+                <Property Name="class" Type="int" Nullable="false" />
+                <Property Name="journal_name" Type="varchar" MaxLength="73" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="get_ppe_files_path" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="exam_date_id" Type="int" Mode="In" />
+          <Parameter Name="ppe_id" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="files_path" Type="varchar" MaxLength="512" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="Хранилище EGESupportModelContainer">
+          <EntitySet Name="areas" EntityType="Self.areas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="au_roles" EntityType="Self.au_roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="au_users" EntityType="Self.au_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="blank_types" EntityType="Self.blank_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="exam_dates" EntityType="Self.exam_dates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="journals" EntityType="Self.journals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ppe" EntityType="Self.ppe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ppe_exam_statuses" EntityType="Self.ppe_exam_statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ppe_exams" EntityType="Self.ppe_exams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ppe_messages" EntityType="Self.ppe_messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subject_blanks" EntityType="Self.subject_blanks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subjects" EntityType="Self.subjects" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_au_users_areas" Association="Self.FK_au_users_areas">
+            <End Role="areas" EntitySet="areas" />
+            <End Role="au_users" EntitySet="au_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_au_users_au_roles" Association="Self.FK_au_users_au_roles">
+            <End Role="au_roles" EntitySet="au_roles" />
+            <End Role="au_users" EntitySet="au_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_au_users_ppe" Association="Self.FK_au_users_ppe">
+            <End Role="ppe" EntitySet="ppe" />
+            <End Role="au_users" EntitySet="au_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_exam_dates_subjects" Association="Self.FK_exam_dates_subjects">
+            <End Role="subjects" EntitySet="subjects" />
+            <End Role="exam_dates" EntitySet="exam_dates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_journals_blank_types" Association="Self.FK_journals_blank_types">
+            <End Role="blank_types" EntitySet="blank_types" />
+            <End Role="journals" EntitySet="journals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_journals_ppe_exams" Association="Self.FK_journals_ppe_exams">
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+            <End Role="journals" EntitySet="journals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_areas" Association="Self.FK_ppe_areas">
+            <End Role="areas" EntitySet="areas" />
+            <End Role="ppe" EntitySet="ppe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_exams_exam_dates" Association="Self.FK_ppe_exams_exam_dates">
+            <End Role="exam_dates" EntitySet="exam_dates" />
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_exams_ppe" Association="Self.FK_ppe_exams_ppe">
+            <End Role="ppe" EntitySet="ppe" />
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_exams_ppe_exam_statuses" Association="Self.FK_ppe_exams_ppe_exam_statuses">
+            <End Role="ppe_exam_statuses" EntitySet="ppe_exam_statuses" />
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_messages_au_users" Association="Self.FK_ppe_messages_au_users">
+            <End Role="au_users" EntitySet="au_users" />
+            <End Role="ppe_messages" EntitySet="ppe_messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_messages_ppe_exams" Association="Self.FK_ppe_messages_ppe_exams">
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+            <End Role="ppe_messages" EntitySet="ppe_messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subject_blanks_blank_types" Association="Self.FK_subject_blanks_blank_types">
+            <End Role="blank_types" EntitySet="blank_types" />
+            <End Role="subject_blanks" EntitySet="subject_blanks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subject_blanks_subjects" Association="Self.FK_subject_blanks_subjects">
+            <End Role="subjects" EntitySet="subjects" />
+            <End Role="subject_blanks" EntitySet="subject_blanks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EGESupportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="areas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="folder_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="au_users" Relationship="Self.FK_au_users_areas" FromRole="areas" ToRole="au_users" />
+          <NavigationProperty Name="ppe" Relationship="Self.FK_ppe_areas" FromRole="areas" ToRole="ppe" />
+        </EntityType>
+        <EntityType Name="au_roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="au_users" Relationship="Self.FK_au_users_au_roles" FromRole="au_roles" ToRole="au_users" />
+          <Property Name="description" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="au_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fio" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="ppe_id" Type="Int32" />
+          <Property Name="area_id" Type="Int32" />
+          <Property Name="disable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="areas" Relationship="Self.FK_au_users_areas" FromRole="au_users" ToRole="areas" />
+          <NavigationProperty Name="au_roles" Relationship="Self.FK_au_users_au_roles" FromRole="au_users" ToRole="au_roles" />
+          <NavigationProperty Name="ppe" Relationship="Self.FK_au_users_ppe" FromRole="au_users" ToRole="ppe" />
+          <NavigationProperty Name="ppe_messages" Relationship="EGESupportModel.FK_ppe_messages_au_users" FromRole="au_users" ToRole="ppe_messages" />
+        </EntityType>
+        <EntityType Name="blank_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="blank_kind_id" Type="Int32" Nullable="false" />
+          <Property Name="short_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="subject_blanks" Relationship="Self.FK_subject_blanks_blank_types" FromRole="blank_types" ToRole="subject_blanks" />
+          <NavigationProperty Name="journals" Relationship="EGESupportModel.FK_journals_blank_types" FromRole="blank_types" ToRole="journals" />
+          <Property Name="folder_name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="exam_dates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subject_id" Type="Int32" Nullable="false" />
+          <Property Name="exam_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="wave_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="class" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="subjects" Relationship="Self.FK_exam_dates_subjects" FromRole="exam_dates" ToRole="subjects" />
+          <Property Name="is_actual" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ppe_exams" Relationship="EGESupportModel.FK_ppe_exams_exam_dates" FromRole="exam_dates" ToRole="ppe_exams" />
+        </EntityType>
+        <EntityType Name="ppe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="area_id" Type="Int32" Nullable="false" />
+          <Property Name="is_tom" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="areas" Relationship="Self.FK_ppe_areas" FromRole="ppe" ToRole="areas" />
+          <NavigationProperty Name="au_users" Relationship="Self.FK_au_users_ppe" FromRole="ppe" ToRole="au_users" />
+          <NavigationProperty Name="ppe_exams" Relationship="EGESupportModel.FK_ppe_exams_ppe" FromRole="ppe" ToRole="ppe_exams" />
+          <Property Name="ppe_code" Type="Int32" Nullable="false" />
+          <Property Name="class" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subject_blanks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subject_id" Type="Int32" Nullable="false" />
+          <Property Name="blank_type_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="blank_types" Relationship="Self.FK_subject_blanks_blank_types" FromRole="subject_blanks" ToRole="blank_types" />
+          <NavigationProperty Name="subjects" Relationship="Self.FK_subject_blanks_subjects" FromRole="subject_blanks" ToRole="subjects" />
+        </EntityType>
+        <EntityType Name="subjects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="test_type_code" Type="Int32" Nullable="false" />
+          <Property Name="folder_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="exam_dates" Relationship="Self.FK_exam_dates_subjects" FromRole="subjects" ToRole="exam_dates" />
+          <NavigationProperty Name="subject_blanks" Relationship="Self.FK_subject_blanks_subjects" FromRole="subjects" ToRole="subject_blanks" />
+        </EntityType>
+        <Association Name="FK_au_users_areas">
+          <End Role="areas" Type="Self.areas" Multiplicity="0..1" />
+          <End Role="au_users" Type="Self.au_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="areas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="au_users">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_areas">
+          <End Role="areas" Type="Self.areas" Multiplicity="1" />
+          <End Role="ppe" Type="Self.ppe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="areas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_au_users_au_roles">
+          <End Role="au_roles" Type="Self.au_roles" Multiplicity="1" />
+          <End Role="au_users" Type="Self.au_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="au_roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="au_users">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_au_users_ppe">
+          <End Role="ppe" Type="Self.ppe" Multiplicity="0..1" />
+          <End Role="au_users" Type="Self.au_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="au_users">
+              <PropertyRef Name="ppe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_subject_blanks_blank_types">
+          <End Role="blank_types" Type="Self.blank_types" Multiplicity="1" />
+          <End Role="subject_blanks" Type="Self.subject_blanks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blank_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject_blanks">
+              <PropertyRef Name="blank_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_exam_dates_subjects">
+          <End Role="subjects" Type="Self.subjects" Multiplicity="1" />
+          <End Role="exam_dates" Type="Self.exam_dates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="exam_dates">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_subject_blanks_subjects">
+          <End Role="subjects" Type="Self.subjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subject_blanks" Type="Self.subject_blanks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject_blanks">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EGESupportEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="areas" EntityType="Self.areas" />
+          <EntitySet Name="au_roles" EntityType="Self.au_roles" />
+          <EntitySet Name="au_users" EntityType="Self.au_users" />
+          <EntitySet Name="blank_types" EntityType="Self.blank_types" />
+          <EntitySet Name="exam_dates" EntityType="Self.exam_dates" />
+          <EntitySet Name="ppe" EntityType="Self.ppe" />
+          <EntitySet Name="subject_blanks" EntityType="Self.subject_blanks" />
+          <EntitySet Name="subjects" EntityType="Self.subjects" />
+          <AssociationSet Name="FK_au_users_areas" Association="Self.FK_au_users_areas">
+            <End Role="areas" EntitySet="areas" />
+            <End Role="au_users" EntitySet="au_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_areas" Association="Self.FK_ppe_areas">
+            <End Role="areas" EntitySet="areas" />
+            <End Role="ppe" EntitySet="ppe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_au_users_au_roles" Association="Self.FK_au_users_au_roles">
+            <End Role="au_roles" EntitySet="au_roles" />
+            <End Role="au_users" EntitySet="au_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_au_users_ppe" Association="Self.FK_au_users_ppe">
+            <End Role="ppe" EntitySet="ppe" />
+            <End Role="au_users" EntitySet="au_users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subject_blanks_blank_types" Association="Self.FK_subject_blanks_blank_types">
+            <End Role="blank_types" EntitySet="blank_types" />
+            <End Role="subject_blanks" EntitySet="subject_blanks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_exam_dates_subjects" Association="Self.FK_exam_dates_subjects">
+            <End Role="subjects" EntitySet="subjects" />
+            <End Role="exam_dates" EntitySet="exam_dates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subject_blanks_subjects" Association="Self.FK_subject_blanks_subjects">
+            <End Role="subjects" EntitySet="subjects" />
+            <End Role="subject_blanks" EntitySet="subject_blanks" />
+          </AssociationSet>
+          <FunctionImport Name="get_list_journals" IsComposable="true" ReturnType="Collection(EGESupportModel.get_list_journals_Result)" />
+          <EntitySet Name="ppe_exam_statuses" EntityType="EGESupportModel.ppe_exam_statuses" />
+          <EntitySet Name="ppe_exams" EntityType="EGESupportModel.ppe_exams" />
+          <AssociationSet Name="FK_ppe_exams_exam_dates" Association="EGESupportModel.FK_ppe_exams_exam_dates">
+            <End Role="exam_dates" EntitySet="exam_dates" />
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_exams_ppe" Association="EGESupportModel.FK_ppe_exams_ppe">
+            <End Role="ppe" EntitySet="ppe" />
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_exams_ppe_exam_statuses" Association="EGESupportModel.FK_ppe_exams_ppe_exam_statuses">
+            <End Role="ppe_exam_statuses" EntitySet="ppe_exam_statuses" />
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+          </AssociationSet>
+          <EntitySet Name="journals" EntityType="EGESupportModel.journals" />
+          <AssociationSet Name="FK_journals_blank_types" Association="EGESupportModel.FK_journals_blank_types">
+            <End Role="blank_types" EntitySet="blank_types" />
+            <End Role="journals" EntitySet="journals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_journals_ppe_exams" Association="EGESupportModel.FK_journals_ppe_exams">
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+            <End Role="journals" EntitySet="journals" />
+          </AssociationSet>
+          <FunctionImport Name="get_journal_content" IsComposable="true" ReturnType="Collection(EGESupportModel.get_journal_content_Result)" />
+          <FunctionImport Name="get_ppe_files_path" IsComposable="true" ReturnType="Collection(String)">
+            <Parameter Name="exam_date_id" Mode="In" Type="Int32" />
+            <Parameter Name="ppe_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ppe_messages" EntityType="EGESupportModel.ppe_messages" />
+          <AssociationSet Name="FK_ppe_messages_au_users" Association="EGESupportModel.FK_ppe_messages_au_users">
+            <End Role="au_users" EntitySet="au_users" />
+            <End Role="ppe_messages" EntitySet="ppe_messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ppe_messages_ppe_exams" Association="EGESupportModel.FK_ppe_messages_ppe_exams">
+            <End Role="ppe_exams" EntitySet="ppe_exams" />
+            <End Role="ppe_messages" EntitySet="ppe_messages" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="get_list_journals_Result">
+          <Property Type="Int32" Name="subject_id" Nullable="false" />
+          <Property Type="String" Name="subject_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="exam_date_id" Nullable="false" />
+          <Property Type="DateTime" Name="exam_date" Nullable="false" Precision="23" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="class" Nullable="false" />
+          <Property Type="String" Name="journal_name" Nullable="true" MaxLength="73" />
+        </ComplexType>
+        <EntityType Name="ppe_exam_statuses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ppe_exams" Relationship="EGESupportModel.FK_ppe_exams_ppe_exam_statuses" FromRole="ppe_exam_statuses" ToRole="ppe_exams" />
+        </EntityType>
+        <EntityType Name="ppe_exams">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="exam_date_id" Type="Int32" Nullable="false" />
+          <Property Name="ppe_id" Type="Int32" Nullable="false" />
+          <Property Name="files_path" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="status_id" Type="Int32" />
+          <NavigationProperty Name="exam_dates" Relationship="EGESupportModel.FK_ppe_exams_exam_dates" FromRole="ppe_exams" ToRole="exam_dates" />
+          <NavigationProperty Name="ppe" Relationship="EGESupportModel.FK_ppe_exams_ppe" FromRole="ppe_exams" ToRole="ppe" />
+          <NavigationProperty Name="ppe_exam_statuses" Relationship="EGESupportModel.FK_ppe_exams_ppe_exam_statuses" FromRole="ppe_exams" ToRole="ppe_exam_statuses" />
+          <NavigationProperty Name="journals" Relationship="EGESupportModel.FK_journals_ppe_exams" FromRole="ppe_exams" ToRole="journals" />
+          <Property Name="is_upload_data" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ppe_messages" Relationship="EGESupportModel.FK_ppe_messages_ppe_exams" FromRole="ppe_exams" ToRole="ppe_messages" />
+        </EntityType>
+        <Association Name="FK_ppe_exams_exam_dates">
+          <End Type="EGESupportModel.exam_dates" Role="exam_dates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="EGESupportModel.ppe_exams" Role="ppe_exams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="exam_dates">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_exams">
+              <PropertyRef Name="exam_date_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_exams_ppe">
+          <End Type="EGESupportModel.ppe" Role="ppe" Multiplicity="1" />
+          <End Type="EGESupportModel.ppe_exams" Role="ppe_exams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_exams">
+              <PropertyRef Name="ppe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_exams_ppe_exam_statuses">
+          <End Type="EGESupportModel.ppe_exam_statuses" Role="ppe_exam_statuses" Multiplicity="0..1" />
+          <End Type="EGESupportModel.ppe_exams" Role="ppe_exams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe_exam_statuses">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_exams">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="journals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ppe_exam_id" Type="Int32" Nullable="false" />
+          <Property Name="blank_type_id" Type="Int32" Nullable="false" />
+          <Property Name="auditorium" Type="Int32" Nullable="false" />
+          <Property Name="count_blanks" Type="Int32" Nullable="false" />
+          <Property Name="count_add_blanks" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="blank_types" Relationship="EGESupportModel.FK_journals_blank_types" FromRole="journals" ToRole="blank_types" />
+          <NavigationProperty Name="ppe_exams" Relationship="EGESupportModel.FK_journals_ppe_exams" FromRole="journals" ToRole="ppe_exams" />
+        </EntityType>
+        <Association Name="FK_journals_blank_types">
+          <End Type="EGESupportModel.blank_types" Role="blank_types" Multiplicity="1" />
+          <End Type="EGESupportModel.journals" Role="journals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blank_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="journals">
+              <PropertyRef Name="blank_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_journals_ppe_exams">
+          <End Type="EGESupportModel.ppe_exams" Role="ppe_exams" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="EGESupportModel.journals" Role="journals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe_exams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="journals">
+              <PropertyRef Name="ppe_exam_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="get_journal_content_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="exam_date_id" Nullable="false" />
+          <Property Type="Int32" Name="area_id" Nullable="false" />
+          <Property Type="Int32" Name="ppe_id" Nullable="false" />
+          <Property Type="Int32" Name="aud" Nullable="false" />
+          <Property Type="Int32" Name="count_blanks" Nullable="false" />
+          <Property Type="Int32" Name="blank_type_id" Nullable="false" />
+          <Property Type="Int32" Name="count_add_blanks" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="ppe_messages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ppe_exam_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="mes_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="au_users" Relationship="EGESupportModel.FK_ppe_messages_au_users" FromRole="ppe_messages" ToRole="au_users" />
+          <NavigationProperty Name="ppe_exams" Relationship="EGESupportModel.FK_ppe_messages_ppe_exams" FromRole="ppe_messages" ToRole="ppe_exams" />
+        </EntityType>
+        <Association Name="FK_ppe_messages_au_users">
+          <End Type="EGESupportModel.au_users" Role="au_users" Multiplicity="1" />
+          <End Type="EGESupportModel.ppe_messages" Role="ppe_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="au_users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_messages">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ppe_messages_ppe_exams">
+          <End Type="EGESupportModel.ppe_exams" Role="ppe_exams" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="EGESupportModel.ppe_messages" Role="ppe_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ppe_exams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ppe_messages">
+              <PropertyRef Name="ppe_exam_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище EGESupportModelContainer" CdmEntityContainer="EGESupportEntities">
+          <EntitySetMapping Name="areas">
+            <EntityTypeMapping TypeName="EGESupportModel.areas">
+              <MappingFragment StoreEntitySet="areas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="folder_name" ColumnName="folder_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="au_roles">
+            <EntityTypeMapping TypeName="EGESupportModel.au_roles">
+              <MappingFragment StoreEntitySet="au_roles">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="au_users">
+            <EntityTypeMapping TypeName="EGESupportModel.au_users">
+              <MappingFragment StoreEntitySet="au_users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fio" ColumnName="fio" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="ppe_id" ColumnName="ppe_id" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+                <ScalarProperty Name="disable" ColumnName="disable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="blank_types">
+            <EntityTypeMapping TypeName="EGESupportModel.blank_types">
+              <MappingFragment StoreEntitySet="blank_types">
+                <ScalarProperty Name="folder_name" ColumnName="folder_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="blank_kind_id" ColumnName="blank_kind_id" />
+                <ScalarProperty Name="short_name" ColumnName="short_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="exam_dates">
+            <EntityTypeMapping TypeName="EGESupportModel.exam_dates">
+              <MappingFragment StoreEntitySet="exam_dates">
+                <ScalarProperty Name="is_actual" ColumnName="is_actual" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="exam_date" ColumnName="exam_date" />
+                <ScalarProperty Name="wave_id" ColumnName="wave_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="class" ColumnName="class" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ppe">
+            <EntityTypeMapping TypeName="EGESupportModel.ppe">
+              <MappingFragment StoreEntitySet="ppe">
+                <ScalarProperty Name="class" ColumnName="class" />
+                <ScalarProperty Name="ppe_code" ColumnName="ppe_code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+                <ScalarProperty Name="is_tom" ColumnName="is_tom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subject_blanks">
+            <EntityTypeMapping TypeName="EGESupportModel.subject_blanks">
+              <MappingFragment StoreEntitySet="subject_blanks">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="blank_type_id" ColumnName="blank_type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subjects">
+            <EntityTypeMapping TypeName="EGESupportModel.subjects">
+              <MappingFragment StoreEntitySet="subjects">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="test_type_code" ColumnName="test_type_code" />
+                <ScalarProperty Name="folder_name" ColumnName="folder_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="get_list_journals" FunctionName="Хранилище EGESupportModel.get_list_journals">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EGESupportModel.get_list_journals_Result">
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+                <ScalarProperty Name="exam_date_id" ColumnName="exam_date_id" />
+                <ScalarProperty Name="exam_date" ColumnName="exam_date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="class" ColumnName="class" />
+                <ScalarProperty Name="journal_name" ColumnName="journal_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ppe_exam_statuses">
+            <EntityTypeMapping TypeName="EGESupportModel.ppe_exam_statuses">
+              <MappingFragment StoreEntitySet="ppe_exam_statuses">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ppe_exams">
+            <EntityTypeMapping TypeName="EGESupportModel.ppe_exams">
+              <MappingFragment StoreEntitySet="ppe_exams">
+                <ScalarProperty Name="is_upload_data" ColumnName="is_upload_data" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="files_path" ColumnName="files_path" />
+                <ScalarProperty Name="ppe_id" ColumnName="ppe_id" />
+                <ScalarProperty Name="exam_date_id" ColumnName="exam_date_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="journals">
+            <EntityTypeMapping TypeName="EGESupportModel.journals">
+              <MappingFragment StoreEntitySet="journals">
+                <ScalarProperty Name="count_add_blanks" ColumnName="count_add_blanks" />
+                <ScalarProperty Name="count_blanks" ColumnName="count_blanks" />
+                <ScalarProperty Name="auditorium" ColumnName="auditorium" />
+                <ScalarProperty Name="blank_type_id" ColumnName="blank_type_id" />
+                <ScalarProperty Name="ppe_exam_id" ColumnName="ppe_exam_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="get_journal_content" FunctionName="Хранилище EGESupportModel.get_journal_content">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EGESupportModel.get_journal_content_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="exam_date_id" ColumnName="exam_date_id" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+                <ScalarProperty Name="ppe_id" ColumnName="ppe_id" />
+                <ScalarProperty Name="aud" ColumnName="aud" />
+                <ScalarProperty Name="count_blanks" ColumnName="count_blanks" />
+                <ScalarProperty Name="blank_type_id" ColumnName="blank_type_id" />
+                <ScalarProperty Name="count_add_blanks" ColumnName="count_add_blanks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="get_ppe_files_path" FunctionName="Хранилище EGESupportModel.get_ppe_files_path" />
+          <EntitySetMapping Name="ppe_messages">
+            <EntityTypeMapping TypeName="EGESupportModel.ppe_messages">
+              <MappingFragment StoreEntitySet="ppe_messages">
+                <ScalarProperty Name="mes_date" ColumnName="mes_date" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="ppe_exam_id" ColumnName="ppe_exam_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

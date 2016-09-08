@@ -1,0 +1,36 @@
+﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="EGEJournal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.ignore.com"
+        xmlns:v="clr-namespace:EGEJournal.View"
+        xmlns:l="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d ignore"
+        Height="768"
+        Width="1100"
+        Title="Журнал бланков ЕГЭ"
+        DataContext="{Binding MainVM, Source={StaticResource Locator}}" 
+        >
+    <l:Interaction.Triggers>
+        <l:EventTrigger EventName="Loaded">
+            <l:InvokeCommandAction Command="{Binding LayoutLoaded}"/>
+        </l:EventTrigger>
+    </l:Interaction.Triggers>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <v:HeaderView Grid.Row="0"/>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentView}"></ContentControl>
+        <telerik:RadBusyIndicator Grid.RowSpan="2" BusyContent="Пожалуйста подождите, идет загрузка данных" IsBusy="{Binding IsBusy, Mode=TwoWay}"/>
+    </Grid>
+</Window>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/EGEServiceRun" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EGEServiceRun" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="UserInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="area_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="fio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ftp_access" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ppe_class_number" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="role_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="user_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserInfo" nillable="true" type="tns:UserInfo" />
+  <xs:complexType name="Fault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Token" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Fault" nillable="true" type="tns:Fault" />
+  <xs:complexType name="ArrayOfJournal">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Journal" nillable="true" type="tns:Journal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJournal" nillable="true" type="tns:ArrayOfJournal" />
+  <xs:complexType name="Journal">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="class_number" type="xs:int" />
+      <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="exam_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="exam_date_id" type="xs:int" />
+      <xs:element minOccurs="0" name="journal_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="status_id" type="xs:int" />
+      <xs:element minOccurs="0" name="status_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="subject_id" type="xs:int" />
+      <xs:element minOccurs="0" name="subject_name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Journal" nillable="true" type="tns:Journal" />
+  <xs:complexType name="ArrayOfArea">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Area" nillable="true" type="tns:Area" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArea" nillable="true" type="tns:ArrayOfArea" />
+  <xs:complexType name="Area">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folder_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Area" nillable="true" type="tns:Area" />
+  <xs:complexType name="ArrayOfPPE">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PPE" nillable="true" type="tns:PPE" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPPE" nillable="true" type="tns:ArrayOfPPE" />
+  <xs:complexType name="PPE">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="area_id" type="xs:int" />
+      <xs:element minOccurs="0" name="area_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="class_num" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="is_tom" type="xs:boolean" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ppe_code" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_full_name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PPE" nillable="true" type="tns:PPE" />
+  <xs:complexType name="ArrayOfBlankTypes">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BlankTypes" nillable="true" type="tns:BlankTypes" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBlankTypes" nillable="true" type="tns:ArrayOfBlankTypes" />
+  <xs:complexType name="BlankTypes">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="blank_kind_id" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="short_name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BlankTypes" nillable="true" type="tns:BlankTypes" />
+  <xs:complexType name="ArrayOfJournalContent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JournalContent" nillable="true" type="tns:JournalContent" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJournalContent" nillable="true" type="tns:ArrayOfJournalContent" />
+  <xs:complexType name="JournalContent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="area_id" type="xs:int" />
+      <xs:element minOccurs="0" name="area_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="aud" type="xs:int" />
+      <xs:element minOccurs="0" name="blank_type_id" type="xs:int" />
+      <xs:element minOccurs="0" name="count_add_blanks" type="xs:int" />
+      <xs:element minOccurs="0" name="count_blanks" type="xs:int" />
+      <xs:element minOccurs="0" name="exam_date_id" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_id" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_is_tom" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JournalContent" nillable="true" type="tns:JournalContent" />
+  <xs:complexType name="PPEExamContent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ListPPEExamBlanks" nillable="true" type="tns:ArrayOfPPEExamBlank" />
+      <xs:element minOccurs="0" name="exam_date" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="exam_date_id" type="xs:int" />
+      <xs:element minOccurs="0" name="exam_files" nillable="true" type="tns:ArrayOfPPEExamFile" />
+      <xs:element minOccurs="0" name="is_uploaded" type="xs:boolean" />
+      <xs:element minOccurs="0" name="messages" nillable="true" type="tns:ArrayOfPPEExamMessage" />
+      <xs:element minOccurs="0" name="ppe_code" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_exam_id" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_files_path" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ppe_id" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="status_id" type="xs:int" />
+      <xs:element minOccurs="0" name="status_name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PPEExamContent" nillable="true" type="tns:PPEExamContent" />
+  <xs:complexType name="ArrayOfPPEExamBlank">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PPEExamBlank" nillable="true" type="tns:PPEExamBlank" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPPEExamBlank" nillable="true" type="tns:ArrayOfPPEExamBlank" />
+  <xs:complexType name="PPEExamBlank">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="aud" type="xs:int" />
+      <xs:element minOccurs="0" name="count_1" type="xs:int" />
+      <xs:element minOccurs="0" name="count_2" type="xs:int" />
+      <xs:element minOccurs="0" name="count_add_2" type="xs:int" />
+      <xs:element minOccurs="0" name="count_r" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_exam_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PPEExamBlank" nillable="true" type="tns:PPEExamBlank" />
+  <xs:complexType name="ArrayOfPPEExamFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PPEExamFile" nillable="true" type="tns:PPEExamFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPPEExamFile" nillable="true" type="tns:ArrayOfPPEExamFile" />
+  <xs:complexType name="PPEExamFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="blank_folder_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="blank_type_id" type="xs:int" />
+      <xs:element minOccurs="0" name="blank_type_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ftp_files" nillable="true" type="tns:ArrayOfFTPFile" />
+      <xs:element minOccurs="0" name="ppe_exam_id" type="xs:int" />
+      <xs:element minOccurs="0" name="server_file_folder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="upload_count_files" type="xs:int" />
+      <xs:element minOccurs="0" name="upload_path_files" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PPEExamFile" nillable="true" type="tns:PPEExamFile" />
+  <xs:complexType name="ArrayOfFTPFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FTPFile" nillable="true" type="tns:FTPFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFTPFile" nillable="true" type="tns:ArrayOfFTPFile" />
+  <xs:complexType name="FTPFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="file_folder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="size" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FTPFile" nillable="true" type="tns:FTPFile" />
+  <xs:complexType name="ArrayOfPPEExamMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PPEExamMessage" nillable="true" type="tns:PPEExamMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPPEExamMessage" nillable="true" type="tns:ArrayOfPPEExamMessage" />
+  <xs:complexType name="PPEExamMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="mes_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ppe_exam_id" type="xs:int" />
+      <xs:element minOccurs="0" name="user_id" type="xs:int" />
+      <xs:element minOccurs="0" name="user_role" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PPEExamMessage" nillable="true" type="tns:PPEExamMessage" />
+  <xs:complexType name="ArrayOfPPEExam">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PPEExam" nillable="true" type="tns:PPEExam" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPPEExam" nillable="true" type="tns:ArrayOfPPEExam" />
+  <xs:complexType name="PPEExam">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="area_id" type="xs:int" />
+      <xs:element minOccurs="0" name="area_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="class_num" type="xs:int" />
+      <xs:element minOccurs="0" name="exam_date_id" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_code" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_id" type="xs:int" />
+      <xs:element minOccurs="0" name="ppe_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="status_id" type="xs:int" />
+      <xs:element minOccurs="0" name="status_name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PPEExam" nillable="true" type="tns:PPEExam" />
+</xs:schema>

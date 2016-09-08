@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="EGEJournal.View.PPEExamView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:help="clr-namespace:EGEJournal.Helpers"
+             xmlns:l="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
+             mc:Ignorable="d" Tag="PPEJornals"
+             d:DesignHeight="768" d:DesignWidth="1100"
+             DataContext="{Binding PPEExamVM, Source={StaticResource Locator}}">
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding RefreshPPEExamCommand}" CommandParameter="{Binding ElementName=GridPPEExam}" Key="F5"/>
+    </UserControl.InputBindings>
+    <UserControl.Resources>
+        <help:ShowIfStringEmptyConverter x:Key="ShowIfStringEmptyConverter"/>
+        <help:HideIfStringEmptyConverter x:Key="HideIfStringEmptyConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Margin="20,10,0,5" Text="{Binding CurrentPPEExamContent.ppe_name}" FontWeight="Bold" Foreground="#FF2664BD" FontSize="15" MaxWidth="700" TextWrapping="Wrap"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Margin="20,5,0,5" Text="{Binding CurrentPPEExamContent.exam_date}" FontWeight="Bold" Foreground="#FF2664BD" MaxWidth="700" TextWrapping="Wrap" FontSize="14" />
+                    <TextBlock Margin="10,5,0,5" Text="Статус: " Foreground="Red" FontSize="14" FontWeight="Bold" />
+                    <TextBlock Margin="0,5,0,5" Text="{Binding CurrentPPEExamContent.status_name}" Foreground="Red" FontWeight="Bold" FontSize="14" />
+                </StackPanel>                
+                <TextBlock Grid.Row="2" Text="Заполните ниже количество бланков, полученных от участников, по каждой аудитории в ППЭ. Введенные данные должны соответствовать форме ППЭ 13-02 МАШ." 
+                           Margin="15,5,0,5" FontWeight="Bold" MaxWidth="700" TextWrapping="Wrap"/>
+                <telerik:RadGridView Grid.Row="3" Margin="15,10" ItemsSource="{Binding PPEExamBlanks}" AutoGenerateColumns="False" IsReadOnly="{Binding isReadOnlyControl}"
+                             NewRowPosition="Top" GroupRenderMode="Flat" ShowGroupPanel="False" ShowColumnFooters="True" Name="GridPPEExam">
+                    <l:Interaction.Triggers>
+                        <l:EventTrigger EventName="RowEditEnded">
+                            <cmd:EventToCommand Command="{Binding GridRowEditEndedCommand}" PassEventArgsToCommand="True"/>
+                        </l:EventTrigger>
+                        <l:EventTrigger EventName="RowValidating">
+                            <cmd:EventToCommand Command="{Binding GridRowValidatingCommand}" PassEventArgsToCommand="True"/>
+                        </l:EventTrigger>
+                        <l:EventTrigger EventName="Deleting">
+                            <cmd:EventToCommand Command="{Binding GridRowDeletingCommand}" PassEventArgsToCommand="True"/>
+                        </l:EventTrigger>
+                    </l:Interaction.Triggers>
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding aud}" Header="Номер ауд." 
+                                                    IsFilterable="False" TextAlignment="Center" Width="100"/>
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding count_r}" Header="Кол-во бланков R" FooterTextAlignment="Center"
+                                                    IsFilterable="False" TextAlignment="Center" Width="150">
+                            <telerik:GridViewDataColumn.AggregateFunctions>
+                                <telerik:SumFunction />
+                            </telerik:GridViewDataColumn.AggregateFunctions>
+                        </telerik:GridViewDataColumn>
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding count_1}" Header="Кол-во бланков №1" FooterTextAlignment="Center"
+                                                    IsFilterable="False" TextAlignment="Center" Width="150">
+                            <telerik:GridViewDataColumn.AggregateFunctions>
+                                <telerik:SumFunction />
+                            </telerik:GridViewDataColumn.AggregateFunctions>
+                        </telerik:GridViewDataColumn>
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding count_2}" Header="Кол-во бланков №2" FooterTextAlignment="Center"
+                                                    IsFilterable="False" TextAlignment="Center" Width="150">
+                            <telerik:GridViewDataColumn.AggregateFunctions>
+                                <telerik:SumFunction />
+                            </telerik:GridViewDataColumn.AggregateFunctions>
+                        </telerik:GridViewDataColumn>
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding count_add_2}" Header="Кол-во доп. бланков №2" FooterTextAlignment="Center"
+                                                    IsFilterable="False" TextAlignment="Center" Width="150">
+                            <telerik:GridViewDataColumn.AggregateFunctions>
+                                <telerik:SumFunction />
+                            </telerik:GridViewDataColumn.AggregateFunctions>
+                        </telerik:GridViewDataColumn>
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+                <TextBlock Grid.Row="4" Text="Ниже укажите папки с файлами отсканированных бланков, ведомостей и др. для отправки их в РЦОИ. В папках должны быть только файлы выбранного типа и текущего экзамена. 
+Архивация и передача файлов произойдет автоматически после нажатия кнопки «Передать файлы в РЦОИ». Перед отправкой проверьте файлы с регистрационными бланками на соответствие кода ППЭ и номеров аудиторий с заполненной выше таблицей и формой ППЭ 13-02 МАШ. 
+Перед отправкой проверьте соответствие количества отправляемых бланков каждого типа с заполненной выше таблицей. После отправки данных в РЦОИ нажмите «Подтвердить передачу»." 
+                           Margin="15,5" FontWeight="Bold" MaxWidth="700" TextWrapping="Wrap"/>
+                <ItemsControl Grid.Row="5" Margin="15,10" ItemsSource="{Binding CurrentPPEExamContent.exam_files}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.RowSpan="2" Margin="5,5,5,0" Padding="5" BorderThickness="1" CornerRadius="10" BorderBrush="#FF2B5F1B">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Margin="0,5" Text="{Binding blank_type_name}" FontWeight="Bold" Foreground="#FF3D4472"/>
+                                        <telerik:RadGridView Grid.Row="1" Margin="0,5" AutoGenerateColumns="False" ItemsSource="{Binding ftp_files}" ShowGroupPanel="False" IsReadOnly="True">
+                                            <telerik:RadGridView.Columns>
+                                                <telerik:GridViewDataColumn DataMemberBinding="{Binding}" MinWidth="250"  Header="Загруженные файлы" 
+                                                                     IsReadOnly="True" IsResizable="False" IsSortable="False" IsFilterable="False">
+                                                    <telerik:GridViewDataColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Button Style="{StaticResource HyperLinkButton}" Content="{Binding file_name}" 
+                                                                    Command="{Binding PPEExamVM.DownloadFileCommand, Source={StaticResource Locator}}"
+                                                                    CommandParameter="{Binding}"/>
+                                                        </DataTemplate>
+                                                    </telerik:GridViewDataColumn.CellTemplate>
+                                                </telerik:GridViewDataColumn>
+                                                <telerik:GridViewDataColumn DataMemberBinding="{Binding}" MinWidth="100" Header="Размер в байтах" 
+                                                                    IsReadOnly="True" IsResizable="False" IsSortable="False" IsFilterable="False">
+                                                    <telerik:GridViewDataColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Padding="5" Text="{Binding size}"/>
+                                                        </DataTemplate>
+                                                    </telerik:GridViewDataColumn.CellTemplate>
+                                                </telerik:GridViewDataColumn>
+                                            </telerik:RadGridView.Columns>
+                                        </telerik:RadGridView>
+                                        <StackPanel Grid.Row="2" Visibility="{Binding PPEExamVM.VisibilityControlForMOUO, Source={StaticResource Locator}}">
+                                            <Button  Margin="10,5" Padding="3" 
+                                                Visibility="{Binding upload_path_files, Converter={StaticResource ShowIfStringEmptyConverter}}"
+                                                Command="{Binding PPEExamVM.ChangeUploadPathCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}"
+                                                Content="Нажмите для загрузки новых файлов" HorizontalAlignment="Left"/>
+                                        </StackPanel>
+                                        <StackPanel  Grid.Row="3" Margin="10,5,0,5" Orientation="Horizontal" 
+                                                     Visibility="{Binding upload_path_files, Converter={StaticResource HideIfStringEmptyConverter}}">
+                                            <TextBlock Text="Путь к файлам: " Padding="3"/>
+                                            <TextBox Padding="3" Text="{Binding upload_path_files, Mode=TwoWay}"/>
+                                            <Button Content="X" Width="25" Command="{Binding PPEExamVM.ClearUploadPathCommand, Source={StaticResource Locator}}"
+                                                    ToolTip="Удалить путь" CommandParameter="{Binding}"/>
+                                            <TextBlock Margin="5,0,0,0" Text="файлов в папке: " Padding="3"/>
+                                            <TextBlock Text="{Binding upload_count_files}" Padding="3"/>
+                                            <Button Margin="10,0,0,0" Style="{StaticResource HyperLinkButton}" Content="изменить путь" 
+                                                    Command="{Binding PPEExamVM.ChangeUploadPathCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <telerik:RadExpander Grid.RowSpan="6" Grid.Column="2" Margin="10,3,3,3" MaxWidth="270" ExpandDirection="Left" Header="Coобщения" BorderThickness="1" BorderBrush="#FF253363" IsExpanded="True">
+                    <ItemsControl ItemsSource="{Binding CurrentPPEExamContent.messages}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Margin="5,10" Text="{Binding user_role}" FontWeight="Bold" Foreground="#FF09528F" />
+                                    <TextBlock Grid.Column="1" Margin="0,10,5,10" Language="ru-RU" Text="{Binding mes_date, StringFormat=\{0:g\}}" FontWeight="Bold" Foreground="#FFA1A4A6" />
+                                    <TextBlock Margin="5,0,5,10" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding message}" TextWrapping="Wrap"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </telerik:RadExpander>
+            </Grid>
+        </ScrollViewer>
+        <ItemsControl Grid.Row="2" HorizontalAlignment="Left" MaxWidth="800" Style="{StaticResource ListViewValidation}" />
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Background="#FF293955">
+            <Button Margin="10,10,0,10" Padding="10,5" HorizontalAlignment="Left" Content="Назад к списку" Command="{Binding ReturnToListCommand}"/>
+            <Button Margin="30,10,0,10" Padding="10,5" HorizontalAlignment="Left" Content="Передать файлы в РЦОИ" Command="{Binding UploadFileCommand}" Visibility="{Binding VisibilityControlForMOUO}"/>
+            <Button Margin="0,10,0,10" Padding="10,5" HorizontalAlignment="Left" Content="Подтвердить передачу" Command="{Binding ConfirmTransferCommand}" Visibility="{Binding VisibilityControlForMOUO}"/>
+            <Button Margin="30,10,0,10" Padding="10,5" HorizontalAlignment="Left" Content="Сообщить об ошибке" Command="{Binding SendErrorCommand}" Visibility="{Binding VisibilityControlForRCOI}"/>
+            <Button Margin="0,10,0,10" Padding="10,5" HorizontalAlignment="Left" Content="Отметить обработанным" Command="{Binding CompleteCommand}" Visibility="{Binding VisibilityControlForRCOI}"/>
+            <Button Margin="30,10,0,10" Padding="10,5" HorizontalAlignment="Left" Content="Выгрузить все файлы" Command="{Binding DownloadAllFilesCommand}" Visibility="{Binding VisibilityControlForRCOI}"/>
+        </StackPanel>
+        <telerik:RadBusyIndicator Grid.RowSpan="4" BusyContent="Пожалуйста подождите..." IsBusy="{Binding IsBusy,Mode=TwoWay}"/>
+        <telerik:RadBusyIndicator Grid.RowSpan="4" IsIndeterminate="False" ProgressValue="{Binding ProgressValue, Mode=TwoWay}" 
+                                  IsBusy="{Binding IsBusyProgress,Mode=TwoWay}"
+                                  Name="BusyIndicatorProgress">
+            <telerik:RadBusyIndicator.BusyContentTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" DataContext="{Binding DataContext, ElementName=BusyIndicatorProgress}">
+                        <TextBlock Text="{Binding ProgressContentValue, Mode=TwoWay}" FontWeight="Bold" />
+                    </StackPanel>
+                </DataTemplate>
+            </telerik:RadBusyIndicator.BusyContentTemplate>
+        </telerik:RadBusyIndicator>
+    </Grid>
+</UserControl>

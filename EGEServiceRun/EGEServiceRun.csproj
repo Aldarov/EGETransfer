@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1757D50D-57DD-4A98-AF04-0FE742F25D89}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EGEServiceRun</RootNamespace>
+    <AssemblyName>EGEServiceRun</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\EGEService\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <ProductName>Ege Transfer Service</ProductName>
+    <PublisherName>Alex Aldarov</PublisherName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>398C5A2062C5D74D2D42C6EA38C21002CA5DBB56</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>EGEServiceRun_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Code\Security\UserAuthentication.cs" />
+    <Compile Include="App_Code\Security\UserAuthorization.cs" />
+    <Compile Include="EGESupport.svc.cs">
+      <DependentUpon>EGESupport.svc</DependentUpon>
+    </Compile>
+    <Compile Include="IEGESupport.cs" />
+    <Compile Include="Infrustructure\Keys.cs" />
+    <Compile Include="Model\areas.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\au_roles.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\au_users.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\blank_types.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EgeSupport.Context.cs">
+      <DependentUpon>EgeSupport.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Model\EgeSupport.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Model\EgeSupport.Designer.cs">
+      <DependentUpon>EgeSupport.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Model\exam_dates.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\get_journal_content_Result.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\get_list_journals_Result.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\journals.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ppe.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ppe_exams.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ppe_exam_statuses.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ppe_messages.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\subjects.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\subject_blanks.cs">
+      <DependentUpon>EgeSupport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkWithFTP.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EGESupport.svc" />
+    <Content Include="Model\EgeSupport.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EgeSupport.edmx</DependentUpon>
+      <LastGenOutput>EgeSupport.cs</LastGenOutput>
+    </Content>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Model\EgeSupport.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EgeSupport.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model\EgeSupport.edmx.diagram">
+      <DependentUpon>EgeSupport.edmx</DependentUpon>
+    </Content>
+    <None Include="EGEServiceRun_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\EgeSupport.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EgeSupport.edmx</DependentUpon>
+      <LastGenOutput>EgeSupport.Context.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Crypto\Crypto.csproj">
+      <Project>{1087649c-018c-4061-b044-9843ca36ffe4}</Project>
+      <Name>Crypto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
